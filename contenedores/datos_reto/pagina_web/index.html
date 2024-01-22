@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metereología</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+        <div id="menu">
+            <nav class="navbar  navbar-expand-md">
+                <div class="container-fluid">
+                    <img src="multimedia/Eguraldiona4.png" alt="logo" style="width: 120px;">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <a href="#texto">Nosotros</a>
+                        <a href="#mapa">Mapa</a>
+                        <a href="#contratos">Contratos</a>
+                        <a href="#contacto">Contacto</a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <a id="login" onclick="loginAbrir()">LOG IN</a>
+        </div>
+
+
+        <div id="loginForm" style="background-color: rgb(255, 255, 255); width: 400px; height: 100vh; display: none;">
+
+            <form action="" method="post">
+                <div class="imgcontainer">
+                    <img src="multimedia/Eguraldiona4.png" alt="logo" class="logo">
+                </div>
+
+                <div class="container">
+                    <label for="usuario"><b>Usuario</b></label>
+                    <input type="text" placeholder="Introduzca usuario" name="usuario" required>
+
+                    <label for="password"><b>Contraseña</b></label>
+                    <input type="password" placeholder="Introduce contraseña" name="password" required>
+
+                    <button type="submit">Login</button>
+                    <p>No tienes cuenta? <a href="">Registrate</a></p>
+
+                    <a onclick="loginAbrir()" style="cursor: pointer;">Volver</a>
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+
+    <div id="texto"
+        style="background-image: url('https://static.vecteezy.com/system/resources/previews/024/388/374/non_2x/forest-in-the-mountains-shades-of-green-vector-illustration-suitable-for-website-social-media-desktop-wallpapers-postcards-generate-ai-free-photo.jpg');">
+        <div id="nombreWeb">
+            <h1>EguraldiOna</h1>
+        </div>
+        <div class="blur">
+            <p>¡Hola en EguraldiOna!
+
+                Soy Iker Zamorano, y aquí te sumergirás en el fascinante mundo de la meteorología. Encuentra pronósticos
+                precisos, mapas interactivos y descubre todo sobre el clima. Únete a nuestra comunidad apasionada por el
+                tiempo. Explora, descubre y mantente informado en EguraldiOna.
+
+                Bienvenido al clima con Iker Zamorano. ¡Disfruta tu estancia!</p>
+        </div>
+
+    </div>
+
+    <div id="mapa" style="height: 600px; width: 80%;"></div>
+
+    <div id="contratos">
+        <div id="fondoContrato">
+            <div id="contrato">
+                <h3>PLAN BASICO</h3>
+                <div id="precio">0€ /Mes</div>
+                <p>Datos básicos a tu disposición GRATIS</p>
+            </div>
+        </div>
+        <div id="fondoContrato">
+            <div id="contrato">
+                <h3>PLAN ORO</h3>
+                <div id="precio">22€ /Mes</div>
+                <p>Más datos a tu disposición</p>
+            </div>
+        </div>
+        <div id="fondoContrato">
+            <div id="contrato">
+                <h3>PLAN PREMIUM</h3>
+                <div id="precio">50€ /Mes</div>
+                <p>Atención al cliente 24h</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="barra"></div>
+
+    <div class="contacto">
+        <form action="">
+            <label for="fname">Nombre</label>
+            <input type="text" id="fname" name="firstname" placeholder="Tu nombre..">
+
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" placeholder="Tus apellidos...">
+
+            <label for="region">Region</label>
+            <select id="region" name="region">
+                <option value="0"></option>
+                <option value="europa">Europa</option>
+                <option value="america">America</option>
+                <option value="asia">Asia</option>
+                <option value="oceania">Oceania</option>
+                <option value="africa">Africa</option>
+            </select>
+
+            <label for="asunto">Asunto</label>
+            <textarea id="asunto" name="asunto" placeholder="Escribe algo.." style="height:200px"></textarea>
+
+            <center><input type="submit" value="Enviar"></center>
+        </form>
+    </div>
+
+
+
+        <footer>
+            <div id="contacto">CONTACTO
+                <p>eguraldiona@gmail.com</p>
+                <p>943552136</p>
+            </div>
+            <div id="compañia">COMPAÑIA
+                <p>EguraldiOna S.A.</p>
+                <p><a href="">Ven a vernos</a></p>
+            </div>
+            <div id="siguenos">SIGUENOS
+                <p><a href="">Instagram <i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></p>
+                <p><a href="">Facebook <i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a></p>
+                <p><a href="">Linkedin <i class="fa-brands fa-linkedin" style="color: #ffffff;"></i></a></p>
+            </div>
+        </footer>
+
+        <div id="footerMovil" style="display: none;">
+            <ul>
+                <li><a href="#mapa"><i class="fa-solid fa-map fa-2xl" style="color: #ffffff;"></i></a></li>
+                <li><a href="#cards"><i class="fa-solid fa-location-dot fa-2xl" style="color: #ffffff;"></i></a></li>
+                <li><a href="#grafico"><i class="fa-solid fa-chart-line fa-2xl" style="color: #ffffff;"></i></a></li>
+                <li><i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #ffffff; cursor: pointer;"
+                        onclick="loginAbrir()"></i>
+                </li>
+            </ul>
+        </div>
+
+   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"> </script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <script src="register.js"></script>
+</body>
+
+</html>

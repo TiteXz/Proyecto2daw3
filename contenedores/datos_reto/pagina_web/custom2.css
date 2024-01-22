@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: rgb(253, 253, 253);
+}
+
+.navbar {
+    position: relative;
+    left: 0;
+}
+
+#menu {
+    background-color: white;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #2d5849;
+    margin-right: 30px;
+}
+
+#menu a:nth-child(1) {
+    margin-left: 40px;
+}
+
+#mapa {
+    margin: 100px 0 100px 10%;
+    border-radius: 10px;
+}
+
+#cards {
+
+    margin: 100px 0 50px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background-color: #7AB362;
+    height: 300px;
+    width: 250px;
+    border-radius: 20px;
+    margin: 0 50px 50px 0;
+    display: none; /* Ocultar las tarjetas inicialmente */
+    #ubicacion{
+        color: white;
+        margin: 10px 0 0 30px;
+    }
+}
+
+.card #datos {
+    color: white;
+}
+
+.card #drag {
+    color: white;
+    text-decoration: none;
+    .dato-icon{
+        display: none;
+    }
+}
+
+.card  i {
+    margin: 0px 20px 10px 0;
+
+    a{
+        padding: 5px;
+        color: white;
+        text-decoration: none;
+    }
+}
+
+#botonGrafico {
+    margin: 50px 0 0 30px;
+    position: absolute;
+
+    a {
+        text-decoration: none;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.349);
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    a:hover {
+        background-color: white;
+        color: #7AB362;
+        cursor: pointer;
+    }
+}
+
+
+
+#grafico {
+    width: 80%;
+    margin: 0 10% 300px 10%;
+    display: none;
+}
+
+
+footer {
+    background-color: #7AB362;
+    justify-content: center;
+    display: flex;
+    height: 150px;
+    padding: 10px;
+    flex-wrap: wrap;
+    width: 100vw;
+    position: relative;
+    bottom: 0;
+    margin-top: 296px;
+}
+
+footer div {
+    margin: 0 75px 0 0;
+}
+
+footer div p {
+    margin-bottom: 0px;
+    color: white;
+}
+
+#siguenos p a:before {
+    content: '· ';
+}
+
+#siguenos p a {
+    text-decoration: none;
+    color: white;
+}
+
+#compañia p a {
+    color: white;
+}
+
+
+#footerMovil {
+    margin-top: 386px;
+    background-color: #7AB362;
+    width: 100vw;
+    height: 120px;
+    display: none;
+    position: relative;
+    bottom: 0;
+
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+
+        li{
+            margin: 50px 70px 0 0;
+        }
+    }
+
+}
+
+
+
+@media (max-width: 767px) {
+    footer {
+        display: none;
+    }
+
+    #footerMovil {
+        display: block !important;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #mapa{
+        height: 600px !important;
+    }
+
+}
