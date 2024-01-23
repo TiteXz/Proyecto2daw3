@@ -4,14 +4,14 @@ services:
   apache: #servidor de apache n.1
           image: httpd:latest #imagen del contenedor
           volumes:
-          - ./Proyecto/pagina_web/:/usr/local/apache2/htdocs/ #a que documento hace referencia
+          - ./contenedores/pagina_web/:/usr/local/apache2/htdocs/ #a que documento hace referencia
           ports: #puertos
           - "8082:80"
            
   nginx:
          image: nginx:latest
          volumes: 
-         - ./datos_reto/nginx.conf:/etc/nginx/nginx.conf #archivo de configuracion para este servidor
+         - ./contenedores/nginx.conf:/etc/nginx/nginx.conf #archivo de configuracion para este servidor
          ports:
          - "8080:80"
 
@@ -26,4 +26,4 @@ services:
         - DB_PASSWORD=12345678
         - DB_DATABASE=Iker
       volumes:
-        - './datos_reto/laravel_api-bbdd:/app'
+        - './contenedores/laravel_api-bbdd:/app'
