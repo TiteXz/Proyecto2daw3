@@ -260,11 +260,13 @@ footer div p {
 
 
 #footerMovil {
-    margin-top: 100px;
     background-color: #7AB362;
     width: 100vw;
     height: 120px;
     display: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 99999;
 
     ul {
         list-style: none;
