@@ -11,8 +11,6 @@ L.marker([43.3404, -1.7921]).addTo(mapa)
 
 function loginAbrir() {
     let desplegable = document.getElementById('loginForm');
-    let registre = document.getElementById('loginform');
-    let login = document.getElementById('registre');
 
     if (desplegable.style.display == 'none') {
         desplegable.style.display = 'block';

@@ -10,6 +10,13 @@ formLogin.addEventListener("submit", event => {
     login()
 })
 
+function mirarToken() {
+    if (localStorage.getItem("token")){
+        window.location.href = "logeado.html"
+    }
+}
+
+
 
 
 
@@ -35,7 +42,7 @@ function abrirFormLogin() {
 function register() {
     let data = {
         name: document.getElementById("usuario").value,
-        email: document.getElementById("correo").value,
+        email: document.getElementById("email").value,
         password: document.getElementById("contrasena").value,
         c_password: document.getElementById("confcontrasena").value
     }
@@ -47,8 +54,6 @@ function register() {
         },
         body: JSON.stringify(data)
     }
-    console.log(config)
-    console.log(data)
 
     fetch("http://localhost:8081/api/register", config)
         .then(response => {
@@ -58,7 +63,8 @@ function register() {
             return response.json();
         })
         .then(data => {
-            console.log(data)
+            localStorage.setItem("token", data["data"]["token"])
+            mirarToken()
         })
 }
 
@@ -74,10 +80,6 @@ function login() {
         },
         body: JSON.stringify(data)
     }
-
-    console.log(config)
-    console.log(data)
-    setTimeout(() => {
         fetch("http://localhost:8081/api/login", config)
             .then(response => {
                 if (!response.ok) {
@@ -86,36 +88,34 @@ function login() {
                 return response.json();
             })
             .then(data => {
-                localStorage.setItem("token",data["data"]["token"])
-                
+                localStorage.setItem("token", data["data"]["token"])
+                mirarToken()
             })
-    }, 2000);
-
-
 }
 
-
 function logout() {
-    let data = {
-        name: document.getElementById("usuario").value,
-    }
+    let token = localStorage.getItem("token");
 
     let config = {
-        method: 'POST',
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(data)
     }
 
     fetch("http://localhost:8081/api/logout", config)
         .then(response => {
             if (!response.ok) {
-                throw new Error("La solicitud no se pudo completar correctamente.");
+                throw new Error(`La solicitud no se pudo completar correctamente: ${response.status} - ${response.statusText}`);
             }
-            return response.json();
+            return response.text();
         })
         .then(data => {
-            localStorage.clear("token")
+            localStorage.removeItem("token")
+            window.location.href = "index.html"
         })
+        .catch(error => {
+            console.error("Error during logout:", error);
+        });
 }

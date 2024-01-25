@@ -1,3 +1,4 @@
+
 var mapa = L.map('mapa').setView([43.3404, -1.7921], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -9,12 +10,13 @@ L.marker([43.3404, -1.7921]).addTo(mapa)
     .openPopup();
 
 function loginAbrir() {
-    var loginForm = document.getElementById('loginForm');
-    if (loginForm.style.display === 'none' || loginForm.style.display === '') {
-        loginForm.style.display = 'block';
+    let desplegable = document.getElementById('loginForm');
+
+    if (desplegable.style.display == 'none') {
+        desplegable.style.display = 'block';
         document.body.style.overflowY = 'hidden';
     } else {
-        loginForm.style.display = 'none';
+        desplegable.style.display = 'none';
         document.body.style.overflowY = 'visible';
     }
 }

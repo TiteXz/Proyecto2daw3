@@ -147,7 +147,7 @@ footer div p {
     width: 100vw;
     height: 120px;
     display: none;
-    position: relative;
+    position: fixed;
     bottom: 0;
 
     ul {

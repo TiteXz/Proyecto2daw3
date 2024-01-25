@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 class RegisterController extends BaseController
 
 {
+
     /**
      * Register api
      *
@@ -18,9 +20,11 @@ class RegisterController extends BaseController
      */
 
     public function register(Request $request): JsonResponse
+
     {
 
         $validator = Validator::make($request->all(), [
+
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
@@ -28,9 +32,15 @@ class RegisterController extends BaseController
 
         ]);
 
+     
+
         if($validator->fails()){
+
             return $this->sendError('Validation Error.', $validator->errors());       
+
         }
+
+     
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
@@ -38,8 +48,13 @@ class RegisterController extends BaseController
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
 
+   
+
         return $this->sendResponse($success, 'User register successfully.');
+
     }
+
+     
 
     /**
      * Login api
@@ -58,17 +73,20 @@ class RegisterController extends BaseController
             $success['name'] =  $user->name;
 
             return $this->sendResponse($success, 'User login successfully.');
+
         } 
 
         else{ 
+
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+
         } 
+
     }
 
     public function logout()
     {
         auth()->user()->tokens()->delete();
-        return reponse()->json(["message" =>'Logout exitoso']);
     }
 
 }

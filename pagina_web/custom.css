@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
+
+#footerMovil {
+    background-color: #7AB362;
+    width: 100vw;
+    height: 120px;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 99999;
+
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+
+        li{
+            margin: 50px 70px 0 0;
+        }
+    }
+}
+
+
 body {
     margin: 0;
     overflow-x: hidden;
@@ -189,7 +211,7 @@ button:hover {
 
 .contacto {
     width: 80%;
-    margin: 0 0 50px 10%;
+    margin: 0 0 200px 10%;
     border-radius: 10px;
     padding: 20px;
     border: solid #7AB362 3px;
@@ -259,25 +281,6 @@ footer div p {
 }
 
 
-#footerMovil {
-    background-color: #7AB362;
-    width: 100vw;
-    height: 120px;
-    display: none;
-    position: fixed;
-    bottom: 0;
-    z-index: 99999;
-
-    ul {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-
-        li{
-            margin: 50px 70px 0 0;
-        }
-    }
-}
 
 @media (max-width: 767px) {
     footer {
