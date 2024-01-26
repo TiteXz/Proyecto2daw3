@@ -22,6 +22,23 @@ function loginAbrir() {
 }
 
 
+function CrearCards() {
+            
+    fetch(`http://localhost:8081`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("La solicitud no se pudo completar correctamente.");
+        }
+        return response.json();
+    })
+    .then(data => {
+       console.log(data)
+    })
+    .catch(error => {
+        console.error("Error al incrementar el número:", error);
+    });
+}
+
 
 const datosCiudades = [
     { nombre: 'Irun', latitud: 43.3404, longitud: -1.7921, velocidadViento: '4m/s', humedad: '50%', direccionViento: 'norte', temperatura: '20ºC', precipitaciones: '30%' },
