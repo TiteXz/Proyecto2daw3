@@ -1,0 +1,34 @@
+Usar euskalmet para ver datos de balizas que elegiré, unos 10.
+
+Front-end y una sola pagina, locale storage para guardar datos.
+
+leaflet si el local storage esta vacio
+
+se vera ciudad, temperatura y humedad
+
+CRUD para las ubicaciones
+
+CRUD para ver diferentes parametros
+
+tooltip para ver el pronostico del dia siguiente al poner el raton encima de una ciudad
+
+grafico entre dos fechas para visualizar humedad y temperatura
+
+
+BACKEND -->
+FASE 1 -->
+	generacion aleatoria de datos y guardarlos en mysql(BBDD)
+
+FASE2 -->
+	Desarrollo de API REST que será lo que haga las peticiones a la SPA sobre meteorologia
+
+FASE3 -->
+	Escalado del background para que se vayan haciendo peticiones a euskalmet periodicamente
+
+FASE4 -->
+	Tutorial de Usuario para la API REST desarrollada(Explicacion de las rutas)
+
+
+
+
+		
