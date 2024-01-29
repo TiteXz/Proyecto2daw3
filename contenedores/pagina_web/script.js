@@ -24,7 +24,7 @@ function loginAbrir() {
 
 function CrearCards() {
             
-    fetch(`http://localhost:8081`)
+    fetch(`https://www.el-tiempo.net/api/json/v2/provincias/20/municipios/20069`)
     .then(response => {
         if (!response.ok) {
             throw new Error("La solicitud no se pudo completar correctamente.");
@@ -32,7 +32,14 @@ function CrearCards() {
         return response.json();
     })
     .then(data => {
-       console.log(data)
+       let datos = {
+        temperatura: data["temperatura_actual"],
+        viento: data["viento"],
+        humedad: data["humedad"],
+        precipitacion: data["precipitacion"],
+        lluvia: data["lluvia"]
+       }
+       console.log(datos)
     })
     .catch(error => {
         console.error("Error al incrementar el número:", error);

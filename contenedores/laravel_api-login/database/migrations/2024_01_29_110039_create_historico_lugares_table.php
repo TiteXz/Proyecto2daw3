@@ -27,4 +27,5 @@ class CreateHistoricoLugaresTable extends Migration
     {
         Schema::dropIfExists('historico_lugares');
     }
+    
 }
