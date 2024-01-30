@@ -4,28 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistoricoLugaresTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::create('historico_lugares', function (Blueprint $table) {
-            $table->string('ubicacion');
-            $table->float('temperatura', 3, 2);
+            $table->string('ubicacion', 25);
+            $table->integer('temperatura');
+            $table->integer('temperatura_max');
+            $table->integer('temperatura_min');
             $table->integer('humedad');
             $table->integer('precipitaciones');
             $table->integer('velocidad_viento');
-            $table->string('direccion_viento');
             $table->timestamp('fecha_log');
-
-            // Clave foránea
-            $table->foreign('ubicacion')->references('ubicacion')->on('lugares')->onDelete('cascade');
 
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('historico_lugares');
     }
-    
-}
+};

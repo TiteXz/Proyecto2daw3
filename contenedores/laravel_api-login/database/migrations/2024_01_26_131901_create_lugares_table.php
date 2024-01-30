@@ -8,7 +8,7 @@ class CreateLugaresTable extends Migration
     public function up()
     {
         Schema::create('lugares', function (Blueprint $table) {
-            $table->string('ubicacion');
+            $table->string('ubicacion', 25);
             $table->float('latitud', 10, 6);
             $table->float('longitud', 10, 6);
             $table->string('cod_zona_euskalmet');

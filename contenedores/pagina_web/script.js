@@ -33,13 +33,16 @@ function CrearCards() {
     })
     .then(data => {
        let datos = {
+        ubicacion: data["breadcrumb"][3]["name"],
         temperatura: data["temperatura_actual"],
         viento: data["viento"],
         humedad: data["humedad"],
         precipitacion: data["precipitacion"],
-        lluvia: data["lluvia"]
+        temperatura_max: data["temperaturas"]['max'],
+        temperatura_min: data["temperaturas"]['min'],
        }
        console.log(datos)
+       console.log(data)
     })
     .catch(error => {
         console.error("Error al incrementar el número:", error);

@@ -5,8 +5,14 @@ services:
     image: markosmartinez/laravelpassport-php8.2
     ports:
       - '8081:8000'
+    environment:
+      - DB_HOST=185.60.40.210
+      - DB_PORT=3306
+      - DB_USERNAME=Iker
+      - DB_PASSWORD=12345678
+      - DB_DATABASE=Iker
     volumes:
-      - './contenedores/laravel_api-login/:/var/www/html/'
+      - './contenedores/laravel_api-login/:/app'
 
   apache:
     image: httpd:latest
@@ -20,11 +26,16 @@ services:
     ports:
       - '8083:8000'
     environment:
-      USAR_WORKER: 1
+      USAR_WORKER : 1
+        - DB_HOST=185.60.40.210
+        - DB_PORT=3306
+        - DB_USERNAME=Iker
+        - DB_PASSWORD=12345678
+        - DB_DATABASE=Iker
       
        
     volumes:
-      - './contenedores/laravel_api-bbdd/:/var/www/html/'
+      - './contenedores/laravel_api-bbdd:/app'
 
 
   nginx:

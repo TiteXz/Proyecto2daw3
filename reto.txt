@@ -1,4 +1,4 @@
-Usar euskalmet para ver datos de balizas que elegiré, unos 10.
+Usar euskalmet para ver datos de balizas que elegiré 5.
 
 Front-end y una sola pagina, locale storage para guardar datos.
 
