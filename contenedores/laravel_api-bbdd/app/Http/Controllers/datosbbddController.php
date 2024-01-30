@@ -5,52 +5,78 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HistoricoLugar;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class DatosbbddController extends Controller
 {
     public function datosHistoricos()
     {
         $lugares = [
-            '48' => '48020',
-            '20' => '20069',
-            '20' => '20067',
-            '20' => '20036',
-            '20' => '20045',
+            '20069' => '20',
+            '48020' => '48',
+            '20067' => '20',
+            '20036' => '20',
+            '20045' => '20',
         ];
-
-
+        $keys = array_keys($lugares);
+        $totalCiudades = count($keys);
         try {
-            foreach ($lugares as $cod_provincia => $cod_ciudad) {
+            for ($i = 0; $i < $totalCiudades; $i++) {
+                $cod_ciudad = $keys[$i];
+                $cod_provincia = $lugares[$cod_ciudad];
+
+                
+                
+
+
+                echo 'hola1';
+
                 $url = "https://www.el-tiempo.net/api/json/v2/provincias/{$cod_provincia}/municipios/{$cod_ciudad}";
                 $response = Http::get($url);
-                echo 'hola1';
+
+                //Log::info("Iteración $i - Respuesta de la API: " . json_encode($response->json()));
+               // Log::info("Iteración $i - Procesando ciudad: $cod_ciudad, Provincia: $cod_provincia");
+              //  Log::info("Iteración $i - URL: $url");
+
+                echo 'hola2';
+
                 if ($response->getStatusCode() == 200) {
                     $data = json_decode($response->getBody(), true);
-                    echo 'hola2';
-                    // Procesamiento de la ubicación
-                    $ubicacion = strtolower(str_replace(['/', ' '], '', $data["breadcrumb"][3]["name"]));
-                    echo strtolower(str_replace(['/', ' '], '', $data["breadcrumb"][3]["name"]));
-                    // Verificar si la ubicación contiene "san sebastian" y asignar "donostia" en ese caso
-                    if (strpos($ubicacion, 'sansebastian') !== false) {
-                        $ubicacion = 'donostia';
+                    echo 'hola3';
+
+                    
+                  
+
+                    if (strpos(strtolower(str_replace(['/', ' '], '', $data["breadcrumb"][3]["name"])), 'sansebastian') !== false) {
+                        $data["breadcrumb"][3]["name"] = 'donostia';
                     }
 
-                    // Almacenar en la base de datos
-                    HistoricoLugar::create([
-                        'ubicacion' => $ubicacion,
+                    // Agrupamos los valores en un array asociativo
+                    $logData = [
+                        'ubicacion' =>$data["breadcrumb"][3]["name"],
                         'temperatura' => $data["temperatura_actual"],
                         'velocidad_viento' => $data["viento"],
                         'humedad' => $data["humedad"],
-                        'precipitacion' => $data["precipitacion"],
+                        'precipitaciones' => $data["precipitacion"] ?? 0,
                         'temperatura_max' => $data["temperaturas"]['max'],
                         'temperatura_min' => $data["temperaturas"]['min'],
-                    ]);
-                    echo 'hola3';
+                        'fecha_log' => now(),
+                    ];
+
+                    try {
+                        HistoricoLugar::create($logData);
+                    } catch (\Exception $e) {
+                        Log::error("Error al almacenar en la base de datos: " . $e->getMessage());
+                    }
+                    
+
+                    echo 'hola4';
                 } else {
                     throw new \Exception("La solicitud para la provincia $cod_provincia y ciudad $cod_ciudad no se pudo completar correctamente.");
-                    echo 'hola4';
+                    echo 'hola5';
                 }
             }
+            echo 'hola6';
 
             return response()->json(['message' => 'Datos de todos los lugares almacenados correctamente']);
         } catch (\Exception $e) {

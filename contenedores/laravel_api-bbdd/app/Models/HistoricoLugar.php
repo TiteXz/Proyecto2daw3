@@ -10,6 +10,7 @@ class HistoricoLugar extends Model
     use HasFactory;
 
     protected $table = 'historico_lugares'; 
+    public $timestamps = false;
 
     protected $fillable = [
         'ubicacion',
@@ -19,5 +20,6 @@ class HistoricoLugar extends Model
         'velocidad_viento',
         'humedad',
         'precipitacion',
+        'fecha_log'
     ];
 }
