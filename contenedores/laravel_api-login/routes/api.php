@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\datosBBDDController;
 
 /*
 
@@ -29,3 +30,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('logout', [RegisterController::class, 'logout']);
 
 });
+
+
+// Ruta para obtener datos de la tabla "lugares"
+Route::get('/lugares', [datosBBDDController::class, 'obtenerLugares']);
+
+// Ruta para obtener datos de la tabla "historico_lugares"
+Route::get('/historico-lugares', [datosBBDDController::class, 'obtenerHistoricoLugares']);

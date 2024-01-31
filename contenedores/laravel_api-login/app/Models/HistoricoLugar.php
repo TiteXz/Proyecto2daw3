@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class HistoricoLugar extends Model
 {
     use HasFactory;
+    protected $table = 'historico_lugares'; 
+    public $timestamps = false;
 
     protected $fillable = [
         'ubicacion',

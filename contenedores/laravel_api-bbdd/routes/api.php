@@ -17,6 +17,4 @@ use App\Http\Controllers\datosbbddController;
 
 Route::get('datosHistoricos', [datosbbddController::class,'datosHistoricos']);
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::get('alterarDatosLigeramente', [datosbbddController::class,'alterarDatosLigeramente']);

@@ -12,9 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        
         $schedule->command('app:datos-reales')->everyFifteenMinutes();
-
+        $schedule->command('app:datos-ficticios')->everyFifteenSeconds();
     }
 
     /**

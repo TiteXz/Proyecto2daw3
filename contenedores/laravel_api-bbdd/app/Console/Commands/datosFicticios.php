@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Http\Controllers\datosbbddController;
 
-class datosReales extends Command
+class datosFicticios extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:datos-reales';
+    protected $signature = 'app:datos-ficticios';
 
     /**
      * The console command description.
@@ -27,7 +27,6 @@ class datosReales extends Command
     public function handle()
     {
         $controladorBBDD = new datosbbddController();
-        $controladorBBDD -> datosHistoricos();
-
+        $controladorBBDD -> alterarDatosLigeramente();
     }
 }
