@@ -59,7 +59,7 @@ function crearTooltips(nombreYcods) {
 
                 tooltiptext.style.position = 'absolute';
                 tooltiptext.style.zIndex = '9999999999';
-                tooltiptext.style.bottom = '110%';
+                tooltiptext.style.bottom = '105%';
                 tooltiptext.style.left = '50%';
                 tooltiptext.style.marginLeft = '-100px'; // Adjust the value based on your design
                 tooltiptext.style.visibility = 'hidden';
