@@ -55,6 +55,14 @@ body {
     }
 }
 
+.card #ubicacion{
+    justify-content: center;
+    display: flex;
+    margin-left: 0;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
 .card #datos {
     color: white;
 }
@@ -65,11 +73,12 @@ body {
     .dato-icon{
         display: none;
     }
+    i{
+        }
 }
 
 .card  i {
-    margin: 0px 20px 10px 0;
-
+    margin: 0 10px 15px 10px;
     a{
         padding: 5px;
         color: white;
@@ -78,20 +87,26 @@ body {
 }
 
 #botonGrafico {
-    margin: 50px 0 0 30px;
+    top: 240px;
     position: absolute;
+    margin-left: 13px;
 
     a {
         text-decoration: none;
         color: white;
         background-color: rgba(0, 0, 0, 0.349);
-        padding: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 85px;
+        padding-right: 87px;
         border-radius: 10px;
+        
+        
     }
 
     a:hover {
-        background-color: white;
-        color: #7AB362;
+        background-color: #608c4f;
+        color: white;
         cursor: pointer;
     }
 }

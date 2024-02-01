@@ -52,36 +52,38 @@ function crearTooltips(nombreYcods) {
             .then(data => {
                 nombreCiudadCapitalizado = key.charAt(0).toUpperCase() + key.slice(1);
                 const tarjeta = document.querySelector(`.${nombreCiudadCapitalizado}`)
-                const tooltiptext = document.createElement('span');
+                // const tooltiptext = document.createElement('span');
+
+
+                tarjeta.title = data["forecastText"]["SPANISH"]
                 
+                // tooltiptext.innerHTML = data["forecastText"]["SPANISH"];
 
-                tooltiptext.innerHTML = data["forecastText"]["SPANISH"];
+                // tooltiptext.style.position = 'absolute';
+                // tooltiptext.style.zIndex = '9999999999';
+                // tooltiptext.style.bottom = '105%';
+                // tooltiptext.style.left = '50%';
+                // tooltiptext.style.marginLeft = '-100px'; 
+                // tooltiptext.style.visibility = 'hidden';
+                // tooltiptext.style.backgroundColor = 'rgba(0, 0, 0, 0.286';
+                // tooltiptext.style.color = 'white';
+                // tooltiptext.style.textAlign = 'center';
+                // tooltiptext.style.padding = '20px';
+                // tooltiptext.style.borderRadius = '20px';
+                // tooltiptext.style.backdropFilter = 'blur(3px)'; 
+                // tooltiptext.style.width = '200px';
+                // tooltiptext.style.fontSize = "12px";
 
-                tooltiptext.style.position = 'absolute';
-                tooltiptext.style.zIndex = '9999999999';
-                tooltiptext.style.bottom = '105%';
-                tooltiptext.style.left = '50%';
-                tooltiptext.style.marginLeft = '-100px'; // Adjust the value based on your design
-                tooltiptext.style.visibility = 'hidden';
-                tooltiptext.style.backgroundColor = 'rgba(0, 0, 0, 0.286';
-                tooltiptext.style.color = 'white';
-                tooltiptext.style.textAlign = 'center';
-                tooltiptext.style.padding = '20px';
-                tooltiptext.style.borderRadius = '20px';
-                tooltiptext.style.backdropFilter = 'blur(3px)'; 
-                tooltiptext.style.width = '200px';
-                tooltiptext.style.fontSize = "12px";
+                // tarjeta.appendChild(tooltiptext);
 
-                tarjeta.appendChild(tooltiptext);
+                // tarjeta.addEventListener('mouseenter', () => {
+                //     tooltiptext.style.visibility = 'visible';
+                // });
 
-                tarjeta.addEventListener('mouseenter', () => {
-                    tooltiptext.style.visibility = 'visible';
-                });
-                
-                tarjeta.addEventListener('mouseleave', () => {
-                    tooltiptext.style.visibility = 'hidden';
-                });
-    
+                // tarjeta.addEventListener('mouseleave', () => {
+                //     tooltiptext.style.visibility = 'hidden';
+                // });
+
 
             })
             .catch(error => {
