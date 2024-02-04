@@ -13,9 +13,6 @@ function CrearCards() {
             let nombreCiudades = {}
 
             data.forEach(ciudad => {
-                if (ciudad.ubicacion == 'Donostia/San Sebastián') {
-                    ciudad.ubicacion = 'Donostia';
-                }
 
                 const tarjeta = document.createElement('div');
                 tarjeta.classList.add('card', ciudad.ubicacion); // Agregar clase con el nombre de la ciudad

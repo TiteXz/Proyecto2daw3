@@ -31,13 +31,12 @@ class DatosbbddController extends Controller
                 if ($response->getStatusCode() == 200) {
                     $data = json_decode($response->getBody(), true);
 
-                    if (strpos(strtolower(str_replace(['/', ' '], '', $data["breadcrumb"][3]["name"])), 'sansebastian') !== false) {
-                        $data["breadcrumb"][3]["name"] = 'donostia';
-                    }
+                    
+
 
                     // Agrupamos los valores en un array asociativo
                     $logData = [
-                        'ubicacion' =>$data["breadcrumb"][3]["name"],
+                        'ubicacion' => ($data["breadcrumb"][3]["name"] == 'Donostia/San Sebastián') ? 'Donostia' : $data["breadcrumb"][3]["name"],
                         'temperatura' => $data["temperatura_actual"],
                         'velocidad_viento' => $data["viento"],
                         'humedad' => $data["humedad"],
@@ -50,13 +49,16 @@ class DatosbbddController extends Controller
                     try {
                         HistoricoLugar::create($logData);
                     } catch (\Exception $e) {
+                        dd($logData['ubicacion']);
                         Log::error("Error al almacenar en la base de datos: " . $e->getMessage());
+
                     }
                     
                 } else {
+                    Log::info("Debug: ubicacion value - " . $logData['ubicacion']);
                     throw new \Exception("La solicitud para la provincia $cod_provincia y ciudad $cod_ciudad no se pudo completar correctamente.");
-                    echo 'hola5';
                 }
+                
             }
 
             return response()->json(['message' => 'Datos de todos los lugares almacenados correctamente']);
@@ -93,7 +95,7 @@ class DatosbbddController extends Controller
 
                 // Agrupamos los valores en un array asociativo
                 $logData = [
-                    'ubicacion' => $data["breadcrumb"][3]["name"],
+                    'ubicacion' => ($data["breadcrumb"][3]["name"] == 'Donostia/San Sebastián') ? 'Donostia' : $data["breadcrumb"][3]["name"],
                     'temperatura' => $data["temperatura_actual"] + mt_rand(-1, 1), 
                     'velocidad_viento' => $data["viento"]+ mt_rand(-1, 1),
                     'humedad' => $data["humedad"] + mt_rand(-2, 2),

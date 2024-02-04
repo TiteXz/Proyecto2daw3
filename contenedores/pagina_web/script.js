@@ -19,8 +19,7 @@ function loginAbrir() {
 
 function mostrarTarjeta(nombreCiudad) {
 
-    const nombreCiudadCapitalizado = nombreCiudad.charAt(0).toUpperCase() + nombreCiudad.slice(1);
-    const tarjeta = document.querySelector(`.${nombreCiudadCapitalizado}`)
+    const tarjeta = document.querySelector(`.${nombreCiudad}`)
     console.log(tarjeta)
     if (tarjeta.style.display == 'none') {
         tarjeta.style.display = 'block'
@@ -29,8 +28,9 @@ function mostrarTarjeta(nombreCiudad) {
 
 function mostrarGrafico() {
     const grafico = document.getElementById('grafico')
+    
 
-    if (grafico.style.display == 'none') {
+    if (grafico.style.display == 'none' || grafico.style.display == '') {
         grafico.style.display = 'block'
     } else grafico.style.display = 'none'
 
@@ -108,7 +108,3 @@ function mostrarGrafico() {
     const intervalo = setInterval(generarNumerosRandom, 10000);
 
 }
-
-
-
-

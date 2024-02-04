@@ -19,7 +19,7 @@ class HistoricoLugar extends Model
         'temperatura_min',
         'velocidad_viento',
         'humedad',
-        'precipitacion',
+        'precipitaciones',
         'fecha_log'
     ];
 }

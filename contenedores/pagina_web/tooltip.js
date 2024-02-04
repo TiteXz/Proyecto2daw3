@@ -15,10 +15,11 @@ function cogerCodigosEuskalmet() {
                 nombreYcod[elemento.ubicacion] = elemento.cod_zona_euskalmet;
             });
             crearTooltips(nombreYcod)
+           
 
         })
         .catch(error => {
-            console.error(`hola amigos`);
+            console.error(error);
         });
 }
 
@@ -35,14 +36,13 @@ function crearTooltips(nombreYcods) {
     const options = {
         method: 'GET',
         headers: {
-            Authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtZXQwMS5hcGlrZXkiLCJpc3MiOiJJRVMgUExBSUFVTkRJIEJISSBJUlVOIiwiZXhwIjoyMjM4MTMxMDAyLCJ2ZXJzaW9uIjoiMS4wLjAiLCJpYXQiOjE2Mzk3NDc5MDcsImVtYWlsIjoiaWtjZmlAcGxhaWF1bmRpLm5ldCJ9.f6kRRsGk7PufFrZrSoaZrcmO3TCj7nIL1GWThyGjfisaphOSXNPhK9uEc2DyLLobXCpZPcuXEtY71JvciGQpWNQZWofLdXWYI3DqJwo30OsardXsbuvvZQ0YgzH5kP8z2_Dar-SO-IaJplBeqXYvdJnxgsinptq1tIflM_TyskPtrANa6PgBEPdOjwXaUoMgrOkVGoOSvN_PCsg-fvKG8K-x-OpfS1bmUIfwnnXi06biabaA1kZ5XmheP1D0aI6u65I8DA36Ai0O0JyieXwRM4OSgtAwn75bqnWOmVFDK0xemRYiajtE0wVL5igTLy6aak4Vaoh3JwnFnKQmA_7dBA'
+            Authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtZXQwMS5hcGlrZXkiLCJpc3MiOiJJRVMgUExBSUFVTkRJIEJISSBJUlVOIiwiZXhwIjoyMjM4MTMxMDAyLCJ2ZXJzaW9uIjoiMS4wLjAiLCJpYXQiOjE2Mzk3NDc5MDcsImVtYWlsIjoiaWtjZmlAcGxhaWF1bmRpLm5ldCJ9.f6kRRsGk7PufFrZrSoaZrcmO3TCj7nIL1GWThyGjfisaphOSXNPhK9uEc2DyLLobXCpZPcuXEtY71JvciGQpWNQZWofLdXWYI3DqJwo30OsardXsbuvvZQ0YgzH5kP8z2_Dar-SO-IaJplBeqXYvdJnxgsinptq1tIflM_TyskPtrANa6PgBEPdOjwXaUoMgrOkVGoOSvN_PCsg-fvKG8K-x-OpfS1bmUIfwnnXi06biabaA1kZ5XmheP1D0aI6u65I8DA36Ai0O0JyieXwRM4OSgtAwn75bqnWOmVFDK0xemRYiajtE0wVL5igTLy6aak4Vaoh3JwnFnKQmA_7dBA',
         }
     }
 
-    let nombreCiudadCapitalizado = ''
-
     for (const key in nombreYcods) {
-        fetch(`https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/${nombreYcods[key]}/locations/${key}/forecast/at/${fechaActualSeparada[0]}/${fechaActualSeparada[1]}/${fechaActualSeparada[2]}/for/${fechaMananaSeparada[0]}${fechaMananaSeparada[1]}${fechaMananaSeparada[2]}`, options)
+
+        fetch(`https://api.euskadi.eus/euskalmet/weather/regions/basque_country/zones/${nombreYcods[key]}/locations/${key.toLowerCase()}/forecast/at/${fechaActualSeparada[0]}/${fechaActualSeparada[1]}/${fechaActualSeparada[2]}/for/${fechaMananaSeparada[0]}${fechaMananaSeparada[1]}${fechaMananaSeparada[2]}`, options)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("La solicitud no se pudo completar correctamente.");
@@ -50,8 +50,7 @@ function crearTooltips(nombreYcods) {
                 return response.json();
             })
             .then(data => {
-                nombreCiudadCapitalizado = key.charAt(0).toUpperCase() + key.slice(1);
-                const tarjeta = document.querySelector(`.${nombreCiudadCapitalizado}`)
+                const tarjeta = document.querySelector(`.${key}`)
                 // const tooltiptext = document.createElement('span');
 
 
@@ -87,7 +86,7 @@ function crearTooltips(nombreYcods) {
 
             })
             .catch(error => {
-                console.error(`Error en la ciudad ${nombreCiudadCapitalizado}:`, error);
+                console.error(`Error en la ciudad ${key}:`, error);
             });
 
     }
