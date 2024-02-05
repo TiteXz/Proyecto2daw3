@@ -14,6 +14,12 @@
 </head>
 
 <body>
+    <div class="alert alert-danger" role="alert" style="display: none;" id="alert">Acceso no autorizado. Por favor,
+        inicia sesión.</div>
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorLogin">Usuario no encontrado. Por
+        favor, revise los datos.</div>
+    <div class="alert alert-danger" role="alert" style="display: none;" id="errorRegister">Error. Por favor, vuelva a
+        rellenar los campos.</div>
     <div id="menu">
         <nav class="navbar  navbar-expand-md">
             <div class="container-fluid">
@@ -69,7 +75,8 @@
                 <input type="text" placeholder="Introduzca email" name="email" id="email" required>
 
                 <label for="password"><b>Contraseña</b></label>
-                <input type="password" placeholder="Introduce contraseña" name="contrasena" id="contrasena" required>
+                <input type="password" placeholder="Introduce contraseña" name="contrasenaRegister"
+                    id="contrasenaRegister" required>
                 <label for="password"><b>Repite la contraseña</b></label>
                 <input type="password" placeholder="Introduce contraseña" name="confcontrasena" id="confcontrasena"
                     required>
@@ -193,6 +200,20 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="register.js"></script>
+    <script>
+        if (localStorage.getItem('error')) {
+            error = document.getElementById('alert')
+            error.style.display = 'block'
+        }
+        if (localStorage.getItem('errorLogin')) {
+            error = document.getElementById('errorLogin')
+            error.style.display = 'block'
+        }
+        if (localStorage.getItem('errorRegister')) {
+            error = document.getElementById('errorRegister')
+            error.style.display = 'block'
+        }
+    </script>
 </body>
 
 </html>

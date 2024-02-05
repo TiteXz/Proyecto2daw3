@@ -112,5 +112,4 @@ function makeElementsDraggable() {
     });
 }
 
-// Llamar a la función para crear tarjetas y hacer elementos arrastrables
 CrearCards();

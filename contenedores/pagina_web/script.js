@@ -1,4 +1,3 @@
-
 var mapa = L.map('mapa').setView([43.3404, -1.7921], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -20,7 +19,7 @@ function loginAbrir() {
 function mostrarTarjeta(nombreCiudad) {
 
     const tarjeta = document.querySelector(`.${nombreCiudad}`)
-    console.log(tarjeta)
+
     if (tarjeta.style.display == 'none') {
         tarjeta.style.display = 'block'
     } else tarjeta.style.display = 'none'
@@ -28,7 +27,7 @@ function mostrarTarjeta(nombreCiudad) {
 
 function mostrarGrafico() {
     const grafico = document.getElementById('grafico')
-    
+
 
     if (grafico.style.display == 'none' || grafico.style.display == '') {
         grafico.style.display = 'block'

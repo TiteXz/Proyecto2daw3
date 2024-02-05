@@ -11,7 +11,7 @@ formLogin.addEventListener("submit", event => {
 })
 
 function mirarToken() {
-    if (localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
         window.location.href = "logeado.html"
     }
 }
@@ -43,7 +43,7 @@ function register() {
     let data = {
         name: document.getElementById("usuario").value,
         email: document.getElementById("email").value,
-        password: document.getElementById("contrasena").value,
+        password: document.getElementById("contrasenaRegister").value,
         c_password: document.getElementById("confcontrasena").value
     }
 
@@ -58,14 +58,30 @@ function register() {
     fetch("http://localhost:8081/api/register", config)
         .then(response => {
             if (!response.ok) {
-                throw new Error("La solicitud no se pudo completar correctamente.");
+                throw new Error("La solicitud no se pudo completar correctamente:" + data["name"] + " " + data["email"] + " " + data["password"] + " " + data["c_password"] + "");
             }
             return response.json();
         })
         .then(data => {
             localStorage.setItem("token", data["data"]["token"])
             mirarToken()
+            error = document.getElementById('alert')
+            errorLogin = document.getElementById('errorLogin')
+            errorRegister = document.getElementById('errorRegister')
+            error.style.display = 'none'
+            errorRegister.style.display = 'none'
+            errorLogin.style.display = 'none'
+            localStorage.removeItem("error");
+            localStorage.removeItem("errorLogin");
+            localStorage.removeItem("errorRegister");
         })
+        .catch(error => {
+            localStorage.setItem("errorRegister", error)
+            localStorage.removeItem("error");
+            localStorage.removeItem("errorLogin");
+            location.reload();
+
+        });
 }
 
 function login() {
@@ -80,17 +96,33 @@ function login() {
         },
         body: JSON.stringify(data)
     }
-        fetch("http://localhost:8081/api/login", config)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("La solicitud no se pudo completar correctamente.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                localStorage.setItem("token", data["data"]["token"])
-                mirarToken()
-            })
+    fetch("http://localhost:8081/api/login", config)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("La solicitud no se pudo completar correctamente.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem("token", data["data"]["token"])
+            mirarToken()
+            error = document.getElementById('alert')
+            errorLogin = document.getElementById('errorLogin')
+            errorRegister = document.getElementById('errorRegister')
+            error.style.display = 'none'
+            errorRegister.style.display = 'none'
+            errorLogin.style.display = 'none'
+            localStorage.removeItem("error");
+            localStorage.removeItem("errorLogin");
+            localStorage.removeItem("errorRegister");
+
+        })
+        .catch(error => {
+            localStorage.setItem("errorLogin", error)
+            localStorage.removeItem("error");
+            localStorage.removeItem("errorRegister");
+            location.reload();
+        });
 }
 
 function logout() {
@@ -113,9 +145,13 @@ function logout() {
         })
         .then(data => {
             localStorage.removeItem("token")
+            localStorage.removeItem("error");
+            localStorage.removeItem("errorLogin");
+            localStorage.removeItem("errorRegister");
             window.location.href = "index.html"
         })
         .catch(error => {
             console.error("Error during logout:", error);
+            location.reload();
         });
 }

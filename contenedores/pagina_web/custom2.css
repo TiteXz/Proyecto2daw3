@@ -168,7 +168,6 @@ footer div p {
         list-style: none;
         display: flex;
         justify-content: center;
-        background-color: rgba(0, 0, 0, 0.286);
 
         li{
             margin: 50px 70px 0 0;
