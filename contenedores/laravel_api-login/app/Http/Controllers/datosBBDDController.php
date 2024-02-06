@@ -27,23 +27,40 @@ class DatosBBDDController extends Controller
 
     public function datosDelAnoPasado()
     {
-        $startDate = Carbon::now()->subYear();
-        $endDate = Carbon::now();
-
+        // Obtener la fecha actual
+        $today = Carbon::now();
+        
+        // Obtener el primer día del año anterior
+        $startDate = Carbon::now()->subYear()->startOfYear();
+        
+        // Obtener el último día del año anterior
+        $endDate = Carbon::now()->subYear()->endOfYear();
+    
+        // Consultar los datos dentro del rango de fechas del año anterior
         $historicoLugares = HistoricoLugar::whereBetween('fecha_log', [$startDate, $endDate])->get();
-
+    
+        // Retornar los datos en formato JSON
         return response()->json($historicoLugares);
     }
 
     public function datosDelMesPasado()
     {
-        $startDate = Carbon::now()->subMonth();
-        $endDate = Carbon::now();
-
+        // Obtener la fecha actual
+        $today = Carbon::now();
+        
+        // Obtener el primer día del mes anterior
+        $startDate = Carbon::now()->subMonth()->startOfMonth();
+        
+        // Obtener el último día del mes anterior
+        $endDate = Carbon::now()->subMonth()->endOfMonth();
+    
+        // Consultar los datos dentro del rango de fechas del mes anterior
         $historicoLugares = HistoricoLugar::whereBetween('fecha_log', [$startDate, $endDate])->get();
-
+    
+        // Retornar los datos en formato JSON
         return response()->json($historicoLugares);
     }
+    
 
     public function datosDeAyer()
     {

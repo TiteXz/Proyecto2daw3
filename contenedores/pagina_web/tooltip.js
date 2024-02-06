@@ -1,5 +1,3 @@
-
-
 function cogerCodigosEuskalmet() {
 
     fetch(`http://localhost:8081/api/lugares`)
@@ -22,7 +20,6 @@ function cogerCodigosEuskalmet() {
             console.error(error);
         });
 }
-
 cogerCodigosEuskalmet()
 
 function crearTooltips(nombreYcods) {
@@ -51,39 +48,8 @@ function crearTooltips(nombreYcods) {
             })
             .then(data => {
                 const tarjeta = document.querySelector(`.${key}`)
-                // const tooltiptext = document.createElement('span');
-
-
                 tarjeta.title = data["forecastText"]["SPANISH"]
-                
-                // tooltiptext.innerHTML = data["forecastText"]["SPANISH"];
-
-                // tooltiptext.style.position = 'absolute';
-                // tooltiptext.style.zIndex = '9999999999';
-                // tooltiptext.style.bottom = '105%';
-                // tooltiptext.style.left = '50%';
-                // tooltiptext.style.marginLeft = '-100px'; 
-                // tooltiptext.style.visibility = 'hidden';
-                // tooltiptext.style.backgroundColor = 'rgba(0, 0, 0, 0.286';
-                // tooltiptext.style.color = 'white';
-                // tooltiptext.style.textAlign = 'center';
-                // tooltiptext.style.padding = '20px';
-                // tooltiptext.style.borderRadius = '20px';
-                // tooltiptext.style.backdropFilter = 'blur(3px)'; 
-                // tooltiptext.style.width = '200px';
-                // tooltiptext.style.fontSize = "12px";
-
-                // tarjeta.appendChild(tooltiptext);
-
-                // tarjeta.addEventListener('mouseenter', () => {
-                //     tooltiptext.style.visibility = 'visible';
-                // });
-
-                // tarjeta.addEventListener('mouseleave', () => {
-                //     tooltiptext.style.visibility = 'hidden';
-                // });
-
-
+               
             })
             .catch(error => {
                 console.error(`Error en la ciudad ${key}:`, error);
@@ -93,8 +59,3 @@ function crearTooltips(nombreYcods) {
 }
 
 crearTooltips()
-
-
-
-
-
