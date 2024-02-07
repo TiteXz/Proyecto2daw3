@@ -33,8 +33,9 @@ function RecogerDatosCards() {
 
 function actualizarDatosCards(data) {
     data.forEach(elemento => {
-        console.log(elemento)
+        // console.log(elemento)
         tarjeta = document.querySelector(`.${elemento["ubicacion"]}`)
+
     });
 }
 
