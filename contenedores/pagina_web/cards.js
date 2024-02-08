@@ -1,40 +1,54 @@
 function DatosCards() {
     fetch(`http://localhost:8081/api/historico-lugares`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("La solicitud no se pudo completar correctamente.");
-        }
-        return response.json();
-    })
-    .then(data => {
-        CrearCards(data); // Llamar a CrearCards con los datos obtenidos
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("La solicitud no se pudo completar correctamente.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            CrearCards(data); // Llamar a CrearCards con los datos obtenidos
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 }
 DatosCards();
 
 function RecogerDatosCards() {
     fetch(`http://localhost:8081/api/historico-lugares`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("La solicitud no se pudo completar correctamente.");
-        }
-        return response.json();
-    })
-    .then(data => {
-        actualizarDatosCards(data); // Llamar a CrearCards con los datos obtenidos
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("La solicitud no se pudo completar correctamente.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            actualizarDatosCards(data);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 }
 
 function actualizarDatosCards(data) {
     data.forEach(elemento => {
-        // console.log(elemento)
-        tarjeta = document.querySelector(`.${elemento["ubicacion"]}`)
+        viento = document.querySelector(`.Viento${elemento["ubicacion"]}`)
+        lluvia = document.querySelector(`.Lluvia${elemento["ubicacion"]}`)
+        temperatura = document.querySelector(`.temperatura${elemento["ubicacion"]}`)
+        temperatura_max = document.querySelector(`.temperatura_max${elemento["ubicacion"]}`)
+        temperatura_min = document.querySelector(`.temperatura_min${elemento["ubicacion"]}`)
+        humedad = document.querySelector(`.humedad${elemento["ubicacion"]}`)
+
+        // Modificar el innerHTML de los elementos .dato-icon dentro de los contenedores
+        viento.querySelector('.dato-icon').innerHTML=`${elemento["velocidad_viento"]}k/h`;
+        lluvia.querySelector('.dato-icon').innerHTML=`${elemento["precipitaciones"]}%`;
+        temperatura.querySelector('.dato-icon').innerHTML=`${elemento["temperatura"]}ºC`;
+        temperatura_max.querySelector('.dato-icon').innerHTML=`${elemento["temperatura_max"]}ºC`;
+        temperatura_min.querySelector('.dato-icon').innerHTML=`${elemento["temperatura_min"]}ºC`;
+        humedad.querySelector('.dato-icon').innerHTML=`${elemento["humedad"]}%`;
+
+       
 
     });
 }
@@ -56,7 +70,7 @@ function CrearCards(data) {
             <center>
                 <div class="drag-container ${ciudad.ubicacion}" id="drag">
                     <p>SELECCIONABLES</p>
-                    <i id="${ciudad.ubicacion}" class="fa-solid fa-wind Viento${ciudad.ubicacion}" style="color: #ffffff;"><a class="dato-icon">${ciudad.velocidad_viento}m/s</a></i>
+                    <i id="${ciudad.ubicacion}" class="fa-solid fa-wind Viento${ciudad.ubicacion}" style="color: #ffffff;"><a class="dato-icon">${ciudad.velocidad_viento}k/h</a></i>
                     <i id="${ciudad.ubicacion}" class="fa-solid fa-cloud-rain Lluvia${ciudad.ubicacion}" style="color: #ffffff;"><a class="dato-icon">${ciudad.precipitaciones}%</a></i>
                     <i id="${ciudad.ubicacion}" class="fa-solid fa-temperature-arrow-up temperatura_max${ciudad.ubicacion}" style="color: #ffffff;"><a class="dato-icon">${ciudad.temperatura_max}ºC</a></i>
                     <i id="${ciudad.ubicacion}" class="fa-solid fa-temperature-arrow-down temperatura_min${ciudad.ubicacion}" style="color: #ffffff;"><a class="dato-icon">${ciudad.temperatura_min}ºC</a></i>
@@ -81,63 +95,52 @@ function CrearCards(data) {
 
 // Esta función hace los elementos arrastrables y maneja los eventos
 function makeElementsDraggable() {
-    let ciudad = "";
+    let draggedItem = null;
+    let origenContainer = null;
 
     // Hacer los elementos arrastrables
     $('.fa-wind, .fa-cloud-rain, .fa-temperature-high, .fa-temperature-arrow-up, .fa-temperature-arrow-down, .fa-droplet').attr('draggable', true);
 
-    // Manejadores de eventos para el Viento
-    $('.fa-wind').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'Viento');
-        ciudad = $(this).attr("id");
+    // Manejadores de eventos para el inicio del arrastre
+    $('.drag-container i, .drop-container i').on("dragstart", function (event) {
+        draggedItem = event.target;
+        origenContainer = $(this).parent().hasClass('drag-container') ? 'drag-container' : 'drop-container';
     });
 
-    // Manejadores de eventos para la Lluvia
-    $('.fa-cloud-rain').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'Lluvia');
-        ciudad = $(this).attr("id");
-    });
-
-    // Manejadores de eventos para la Temperatura
-    $('.fa-temperature-high').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'temperatura');
-        ciudad = $(this).attr("id");
-    });
-
-    // Manejadores de eventos para la Temperatura Máxima
-    $('.fa-temperature-arrow-up').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'temperatura_max');
-        ciudad = $(this).attr("id");
-    });
-
-    // Manejadores de eventos para la Temperatura Mínima
-    $('.fa-temperature-arrow-down').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'temperatura_min');
-        ciudad = $(this).attr("id");
-    });
-
-    // Manejadores de eventos para la Humedad
-    $('.fa-droplet').on("dragstart", function (event) {
-        event.originalEvent.dataTransfer.setData('text', 'humedad');
-        ciudad = $(this).attr("id");
-    });
-
-    // Manejadores de eventos comunes para el "drag" y "datos"
-    $(`.drop-container,.drag-container`).on("dragover dragenter dragleave", function (event) {
+    // Manejadores de eventos comunes para el "drag" y "drop"
+    $('.drag-container, .drop-container').on("dragover dragenter dragleave", function (event) {
         event.preventDefault();
     });
 
+    // Manejador de eventos drop para el contenedor drop-container
     $('.drop-container').on("drop", function (event) {
         event.preventDefault();
-        let data = event.originalEvent.dataTransfer.getData('text');
-        const ciudadTarjeta = $(this).parent().parent()[0].className.split(' ')[1];
-        const draggedItem = document.querySelector(`.${data}${ciudadTarjeta}`);
+        if (draggedItem) {
+            const dropContainer = $(this);
+            const targetContainer = dropContainer.hasClass('drag-container') ? 'drag-container' : 'drop-container';
+            if (origenContainer !== targetContainer) {
+                dropContainer.append(draggedItem);
+            }
+            draggedItem = null;
+            origenContainer = null;
+        }
+    });
 
-        if (ciudad == ciudadTarjeta && event.target.tagName != "I" && event.target.tagName != "A" && event.target.tagName != "P") {
-            event.target.appendChild(draggedItem);
+    // Manejador de eventos drop para el contenedor drag-container
+    $('.drag-container').on("drop", function (event) {
+        event.preventDefault();
+        if (draggedItem) {
+            const dropContainer = $(this);
+            const targetContainer = dropContainer.hasClass('drag-container') ? 'drag-container' : 'drop-container';
+            if (origenContainer !== targetContainer) {
+                dropContainer.append(draggedItem);
+            }
+            draggedItem = null;
+            origenContainer = null;
         }
     });
 }
 
+makeElementsDraggable();
+
 CrearCards();
-setInterval(CrearCards, 15000);
