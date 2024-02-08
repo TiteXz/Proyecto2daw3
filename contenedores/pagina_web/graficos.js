@@ -45,6 +45,84 @@ function mostrarGrafico(nombreCiudad) {
                             backgroundColor: "rgb(218, 52, 52)",
                             borderColor: "rgba(0,0,255,0.1)",
                             data: yValues1
+                            
+                        },
+                        {
+                            label: 'Humedad',
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "aqua",
+                            borderColor: "rgba(255,0,0,0.1)",
+                            data: yValues2
+                        }
+                    ]
+                },
+                options: {
+                    legend: { display: true },
+                    scales: {
+                        y: {
+                            min: -10,
+                            max: 100,
+                            ticks: {
+                                stepSize: 10,
+                            },
+                        }
+                    }
+                }
+            });
+            crearGráficoAnoPasado(nombreCiudad)
+            crearGráficoMesPasado(nombreCiudad)
+            crearGráficoAyer(nombreCiudad)
+            crearGráficoHoy(nombreCiudad)
+
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+
+
+    }
+
+    function crearGráficoAnoPasado(nombreCiudad) {
+        fetch(`http://localhost:8081/api/historico-ano-pasado`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("La solicitud no se pudo completar correctamente.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const temperaturas = [];
+            const humedades = [];
+            data.forEach(elemento => {
+                if (elemento["ubicacion"] == nombreCiudad) {
+                    temperaturas.push(elemento["temperatura"]);
+                    humedades.push(elemento["humedad"]);
+                }
+            });
+            console.log(nombreCiudad)
+            console.log("año-anterior")
+            console.log("Temperaturas:", temperaturas);
+            console.log("Humedades:", humedades);
+
+            const xValues = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'semptiembre', 'octubre', 'noviembre' , 'diciembre'];
+            let yValues1 =temperaturas;
+            let yValues2 =humedades;
+        
+            const ctx = document.getElementById("myChart").getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [
+                        {
+                            label: 'Temperatura',
+                            fill: false,
+                            lineTension: 0,
+                            backgroundColor: "rgb(218, 52, 52)",
+                            borderColor: "rgba(0,0,255,0.1)",
+                            data: yValues1
+                            
                         },
                         {
                             label: 'Humedad',
@@ -75,7 +153,11 @@ function mostrarGrafico(nombreCiudad) {
             console.error("Error:", error);
         });
 
-    fetch(`http://localhost:8081/api/historico-mes-pasado`)
+    }
+
+
+    function crearGráficoMesPasado(nombreCiudad){
+        fetch(`http://localhost:8081/api/historico-mes-pasado`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente.");
@@ -99,31 +181,38 @@ function mostrarGrafico(nombreCiudad) {
             console.error("Error:", error);
         });
 
-    fetch(`http://localhost:8081/api/historico-ayer`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("La solicitud no se pudo completar correctamente.");
-            }
-            return response.json();
-        })
-        .then(data => {
-            const temperaturas = [];
-            const humedades = [];
-            data.forEach(elemento => {
-                if (elemento["ubicacion"] == nombreCiudad) {
-                    temperaturas.push(elemento["temperatura"]);
-                    humedades.push(elemento["humedad"]);
-                }
-            });
-            console.log("ayer")
-            console.log("Temperaturas:", temperaturas);
-            console.log("Humedades:", humedades);
-          
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+    }
 
+    function crearGráficoAyer(nombreCiudad) {
+        
+    fetch(`http://localhost:8081/api/historico-ayer`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("La solicitud no se pudo completar correctamente.");
+        }
+        return response.json();
+    })
+    .then(data => {
+        const temperaturas = [];
+        const humedades = [];
+        data.forEach(elemento => {
+            if (elemento["ubicacion"] == nombreCiudad) {
+                temperaturas.push(elemento["temperatura"]);
+                humedades.push(elemento["humedad"]);
+            }
+        });
+        console.log("ayer")
+        console.log("Temperaturas:", temperaturas);
+        console.log("Humedades:", humedades);
+      
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+    }
+
+   function crearGráficoHoy(params) {
+    
     fetch(`http://localhost:8081/api/historico-hoy`)
         .then(response => {
             if (!response.ok) {
@@ -150,6 +239,8 @@ function mostrarGrafico(nombreCiudad) {
             console.error("Error:", error);
         });
 
+
+   }
 
    
 
@@ -182,4 +273,3 @@ function mostrarGrafico(nombreCiudad) {
     //     myChart.update();
     // }
 
-}

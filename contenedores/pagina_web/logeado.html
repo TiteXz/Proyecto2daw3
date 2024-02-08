@@ -35,7 +35,6 @@
             box-shadow: none;
             z-index: 99999999;
             backdrop-filter: blur(15px);
-            /* filter: blur(15px); */
             box-shadow: 0px 0px 25px rgb(30, 30, 30);
         }
     </style>
@@ -73,6 +72,12 @@
 
         <div id="grafico">
             <h1 id="ubicacionGrafico"></h1>
+            <div id="botones">
+                <button id="ano-pasado" onclick="crearGráficoAnoPasado()">AÑO PASADO</button>
+                <button id="mes-pasado" onclick="crearGráficoMesPasado()">MES PASADO</button>
+                <button id="ayer" onclick="crearGráficoAyer()">AYER</button>
+                <button id="hoy" onclick="crearGráficoHoy()">HOY</button>
+            </div>
             <canvas id="myChart"></canvas>
         </div>
     </div>
