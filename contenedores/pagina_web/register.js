@@ -1,3 +1,5 @@
+let urlActual = (new URL(window.location.origin)).hostname;
+
 let formRegister = document.getElementById("registerform")
 formRegister.addEventListener("submit", event => {
     event.preventDefault()
@@ -55,7 +57,7 @@ function register() {
         body: JSON.stringify(data)
     }
 
-    fetch("http://localhost:8081/api/register", config)
+    fetch("http://"+urlActual+":8081/api/register", config)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente:" + data["name"] + " " + data["email"] + " " + data["password"] + " " + data["c_password"] + "");
@@ -96,7 +98,7 @@ function login() {
         },
         body: JSON.stringify(data)
     }
-    fetch("http://localhost:8081/api/login", config)
+    fetch("http://"+urlActual+":8081/api/login", config)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente.");
@@ -136,7 +138,7 @@ function logout() {
         },
     }
 
-    fetch("http://localhost:8081/api/logout", config)
+    fetch("http://"+urlActual+":8081/api/logout", config)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`La solicitud no se pudo completar correctamente: ${response.status} - ${response.statusText}`);

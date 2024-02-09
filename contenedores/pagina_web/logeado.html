@@ -73,12 +73,15 @@
         <div id="grafico">
             <h1 id="ubicacionGrafico"></h1>
             <div id="botones">
-                <button id="ano-pasado" onclick="crearGráficoAnoPasado()">AÑO PASADO</button>
-                <button id="mes-pasado" onclick="crearGráficoMesPasado()">MES PASADO</button>
-                <button id="ayer" onclick="crearGráficoAyer()">AYER</button>
-                <button id="hoy" onclick="crearGráficoHoy()">HOY</button>
+                <button id="ano-pasado" onclick="mostrarGraficoAnoPasado()">AÑO PASADO</button>
+                <button id="mes-pasado" onclick="mostrarGraficoMesPasado()">MES PASADO</button>
+                <button id="ayer" onclick="mostrarGraficoAyer()">AYER</button>
+                <button id="hoy" onclick="mostrarGraficoHoy()">HOY</button>
             </div>
             <canvas id="myChart"></canvas>
+            <canvas id="myChart2" style="display: none;"></canvas>
+            <canvas id="myChart3" style="display: none;"></canvas>
+            <canvas id="myChart4" style="display: none;"></canvas>
         </div>
     </div>
 

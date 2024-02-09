@@ -1,5 +1,5 @@
 function DatosCards() {
-    fetch(`http://localhost:8081/api/historico-lugares`)
+    fetch(`http://${urlActual}:8081/api/historico-lugares`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente.");
@@ -16,7 +16,7 @@ function DatosCards() {
 DatosCards();
 
 function RecogerDatosCards() {
-    fetch(`http://localhost:8081/api/historico-lugares`)
+    fetch(`http://${urlActual}:8081/api/historico-lugares`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente.");

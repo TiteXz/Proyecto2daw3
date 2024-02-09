@@ -1,6 +1,6 @@
 function cogerCodigosEuskalmet() {
 
-    fetch(`http://localhost:8081/api/lugares`)
+    fetch(`http://${urlActual}:8081/api/lugares`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("La solicitud no se pudo completar correctamente.");

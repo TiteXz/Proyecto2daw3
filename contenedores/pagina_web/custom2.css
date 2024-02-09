@@ -29,6 +29,11 @@ body {
     margin-left: 40px;
 }
 
+#logout{
+    color: #2d5849;
+    margin-right: 10px;
+}
+
 #mapa {
     margin: 100px 0 100px 10%;
     border-radius: 10px;
